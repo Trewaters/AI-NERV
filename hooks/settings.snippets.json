@@ -1,0 +1,79 @@
+{
+  "//": "Reusable hook definitions. These are NOT loaded automatically — copy the entries you want into the consuming repo's .claude/settings.json under its 'hooks' key. See hooks/README.md. Paths assume the core is vendored at .harness-core/ in the consuming repo.",
+  "snippets": {
+    "block-main-branch": {
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "node \"$CLAUDE_PROJECT_DIR/.harness-core/hooks/block-main-branch.js\""
+            }
+          ]
+        }
+      ]
+    },
+    "secret-scan": {
+      "PreToolUse": [
+        {
+          "matcher": "Write|Edit",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "node \"$CLAUDE_PROJECT_DIR/.harness-core/hooks/secret-scan.js\""
+            }
+          ]
+        }
+      ]
+    },
+    "format-on-save": {
+      "PostToolUse": [
+        {
+          "matcher": "Write|Edit",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "node \"$CLAUDE_PROJECT_DIR/.harness-core/hooks/format-on-save.js\""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "exampleCombined": {
+    "hooks": {
+      "PreToolUse": [
+        {
+          "matcher": "Bash",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "node \"$CLAUDE_PROJECT_DIR/.harness-core/hooks/block-main-branch.js\""
+            }
+          ]
+        },
+        {
+          "matcher": "Write|Edit",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "node \"$CLAUDE_PROJECT_DIR/.harness-core/hooks/secret-scan.js\""
+            }
+          ]
+        }
+      ],
+      "PostToolUse": [
+        {
+          "matcher": "Write|Edit",
+          "hooks": [
+            {
+              "type": "command",
+              "command": "node \"$CLAUDE_PROJECT_DIR/.harness-core/hooks/format-on-save.js\""
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
