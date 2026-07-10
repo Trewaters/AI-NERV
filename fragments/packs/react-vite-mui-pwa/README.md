@@ -44,7 +44,7 @@ The generic template workflow lives in the root `README.md` ("Creating a new tem
 
 ```bash
 # 1. Create and clone
-gh repo create Trewaters/template-react-vite-mui-pwa --public --clone
+gh repo create [Github_user]/template-react-vite-mui-pwa --public --clone
 cd template-react-vite-mui-pwa
 
 # 2. Scaffold Vite + React + TypeScript
@@ -60,7 +60,7 @@ git add -A && git commit -m "Scaffold react-ts with Vite, MUI, vite-plugin-pwa"
 git branch -M main
 
 # 5. Wire in the harness core
-git subtree add --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree add --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 
 # 6. Copy fragments: the SPA baseline pack plus this pack
 mkdir -p ai/fragments
@@ -81,7 +81,7 @@ bash .harness-core/scripts/build-instructions.sh
 # 9. Commit, push, mark as template
 git add -A && git commit -m "Add harness core, MUI/PWA fragments, skills, generated instructions"
 git push -u origin main
-gh repo edit Trewaters/template-react-vite-mui-pwa --template
+gh repo edit [Github_user]/template-react-vite-mui-pwa --template
 ```
 
 Then hand-finish the scaffold so the template actually demonstrates the rules (an agent working in the template repo can do this from the fragments):

@@ -421,7 +421,7 @@ authority, budget, and time.
 - **Change log:** Track meaningful changes through this repository's commit
   history and releases.
 - **Feedback:** Open an issue on this repository
-  (<https://github.com/Trewaters/ai-harness-core>) to flag exclusionary
+  (<https://github.com/[Github_user]/ai-harness-core>) to flag exclusionary
   patterns, language, or assumptions in this file or in the guidance it
   generates.
 
