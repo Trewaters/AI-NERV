@@ -45,7 +45,7 @@ Run these from Git Bash (steps 4, 5, 6, and 8 use bash syntax):
 
 ```bash
 # 1. Create the repo on GitHub and clone it
-gh repo create Trewaters/template-<name> --public --clone
+gh repo create [Github_user]/template-<name> --public --clone
 cd template-<name>
 
 # 2. Scaffold the stack (example: Vite + React)
@@ -57,7 +57,7 @@ git add -A && git commit -m "Scaffold react-ts with Vite"
 git branch -M main   # ensure the branch is named main regardless of git defaults
 
 # 4. Wire in the harness core (see "Wiring into a template repo" below)
-git subtree add --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree add --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 
 # 5. Add stack-specific rules: copy the numbered fragments (not the README)
 #    from the relevant pack into this repo's ai/fragments/, then delete any
@@ -83,13 +83,13 @@ bash .harness-core/scripts/build-instructions.sh
 # 9. Commit, push, and mark it as a GitHub template repository
 git add -A && git commit -m "Add harness core, stack fragments, skills, generated instructions"
 git push -u origin main
-gh repo edit Trewaters/template-<name> --template
+gh repo edit [Github_user]/template-<name> --template
 ```
 
 Step 9's `--template` flag is what enables the "Use this template" button and:
 
 ```bash
-gh repo create my-new-app --template Trewaters/template-<name> --private --clone
+gh repo create my-new-app --template [Github_user]/template-<name> --private --clone
 ```
 
 which is how every new project starts — a fresh repo, no shared history, harness included.
@@ -102,7 +102,7 @@ One-time, from the template repo's root (the repo must already have at least one
 commit and a clean working tree — commit any pending changes first):
 
 ```bash
-git subtree add --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree add --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 ```
 
 Then generate the instruction files (rerun any time fragments change):
@@ -139,7 +139,7 @@ at least one commit:
 
 ```bash
 # 1. Wire in the harness core
-git subtree add --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree add --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 
 # 2. Copy the pack's numbered fragments (not the README) into ai/fragments/
 mkdir -p ai/fragments
@@ -196,7 +196,7 @@ README for what its fragments assume).
 From the template repo's root:
 
 ```bash
-git subtree pull --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree pull --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 bash .harness-core/scripts/build-instructions.sh
 ```
 

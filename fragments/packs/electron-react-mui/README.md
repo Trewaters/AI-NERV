@@ -58,7 +58,7 @@ The generic template workflow lives in the root `README.md` ("Creating a new tem
 
 ```bash
 # 1. Create and clone
-gh repo create Trewaters/template-electron-react-mui --public --clone
+gh repo create [Github_user]/template-electron-react-mui --public --clone
 cd template-electron-react-mui
 
 # 2. Scaffold electron-vite + React + TypeScript
@@ -74,7 +74,7 @@ git add -A && git commit -m "Scaffold electron-vite react-ts with MUI"
 git branch -M main
 
 # 5. Wire in the harness core
-git subtree add --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree add --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 
 # 6. Copy fragments: the SPA baseline, the MUI fragment, then this pack
 mkdir -p ai/fragments
@@ -97,7 +97,7 @@ bash .harness-core/scripts/build-instructions.sh
 # 9. Commit, push, mark as template
 git add -A && git commit -m "Add harness core, Electron/MUI fragments, skills, generated instructions"
 git push -u origin main
-gh repo edit Trewaters/template-electron-react-mui --template
+gh repo edit [Github_user]/template-electron-react-mui --template
 ```
 
 Then hand-finish the scaffold so the template actually demonstrates the rules (an agent working in the template repo can do this from the fragments):

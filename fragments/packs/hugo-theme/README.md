@@ -45,7 +45,7 @@ The generic template workflow lives in the root `README.md` ("Creating a new tem
 
 ```bash
 # 1. Create and clone
-gh repo create Trewaters/template-hugo-theme --public --clone
+gh repo create [Github_user]/template-hugo-theme --public --clone
 cd template-hugo-theme
 
 # 2. Scaffold the site and an in-repo theme
@@ -59,7 +59,7 @@ git add -A && git commit -m "Scaffold Hugo site with in-repo theme"
 git branch -M main
 
 # 4. Wire in the harness core
-git subtree add --prefix .harness-core https://github.com/Trewaters/ai-harness-core.git main --squash
+git subtree add --prefix .harness-core https://github.com/[Github_user]/ai-harness-core.git main --squash
 
 # 5. Copy this pack's fragments
 mkdir -p ai/fragments
@@ -79,7 +79,7 @@ bash .harness-core/scripts/build-instructions.sh
 # 8. Commit, push, mark as template
 git add -A && git commit -m "Add harness core, Hugo fragments, skills, generated instructions"
 git push -u origin main
-gh repo edit Trewaters/template-hugo-theme --template
+gh repo edit [Github_user]/template-hugo-theme --template
 ```
 
 Then hand-finish the scaffold so the template actually demonstrates the rules (an agent working in the template repo can do this from the fragments):
