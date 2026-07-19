@@ -204,6 +204,33 @@ Note: the subtree pull only updates `.harness-core/`. Skills copied into `.claud
 and pack fragments copied into `ai/fragments/` are plain copies — if the core versions
 changed, re-copy them (same `cp` commands as template-creation steps 5 and 6).
 
+## Promoting rule changes from another repo back into the core
+
+The resync command above flows one way: it pulls changes from `ai-harness-core` into a
+consuming repo. It does not pull rule edits from a consuming repo back into this core
+repo.
+
+When a consuming repo grows a rule that should become reusable, promote it here first:
+
+1. Decide where the rule belongs:
+    - shared rule for every repo: `fragments/`
+    - reusable stack rule: `fragments/packs/<pack-name>/`
+    - repo-specific rule: keep it in that repo's `ai/fragments/`
+    - reusable workflow: `skills/<skill-name>/SKILL.md`
+2. Copy or adapt the rule into the right source file in this repo.
+3. Check for overlap with existing fragments or skills and consolidate instead of
+    duplicating guidance.
+4. Commit and push the change in `ai-harness-core`.
+5. In each consuming repo that should receive it, run the resync command above and then
+    rerun `bash .harness-core/scripts/build-instructions.sh`.
+
+If the consuming repo changed files inside its vendored `.harness-core/` directory, a
+`git subtree push` workflow can technically publish that subtree back upstream. Prefer
+manual promotion unless you deliberately edited `.harness-core/` as source material and
+have reviewed the exact diff being pushed. Most repo-local changes live outside the
+subtree (`ai/fragments/`, `.claude/skills/`, generated instruction files), so they must
+be copied into this repo intentionally.
+
 ## Adding a fragment
 
 1. Create `fragments/NN-name.md` — pick `NN` to slot it where it belongs in the reading order.
