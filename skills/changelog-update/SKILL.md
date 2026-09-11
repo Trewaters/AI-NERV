@@ -1,6 +1,7 @@
 ---
 name: changelog-update
 description: Update CHANGELOG.md for the changes on the current branch, following Keep a Changelog format. Use when the user asks to update the changelog, prep release notes, or before opening a PR in repos that keep a changelog.
+user-invocable: true
 ---
 
 # Changelog update

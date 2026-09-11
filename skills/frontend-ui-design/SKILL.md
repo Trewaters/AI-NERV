@@ -2,6 +2,7 @@
 name: frontend-ui-design
 description: Design and build premium, immersive frontend UI — deliberate aesthetic direction, motion design, fluid typography, and performance guardrails. Use when the user asks for a "premium", "immersive", "polished", or "Awwwards-style" page or component, or asks to elevate the visual quality of existing UI. Not for routine CRUD screens or internal tooling where plain, fast UI is the right call.
 argument-hint: "Optional: aesthetic direction (editorial, organic, cyber, cinematic), target page/component, or 'audit' to review existing UI"
+user-invocable: true
 ---
 
 # Frontend UI Design

@@ -3,7 +3,7 @@
 // Blocks `git commit` / `git push` while the repo is on main or master.
 // Exit 2 = block the tool call and show stderr to the model.
 "use strict";
-const { execSync } = require("child_process");
+const { currentBranch, isProtectedBranch } = require("./lib/git");
 
 let input = "";
 process.stdin.on("data", (chunk) => (input += chunk));
@@ -24,18 +24,8 @@ process.stdin.on("end", () => {
   );
   if (!gitVerb) process.exit(0);
 
-  let branch = "";
-  try {
-    branch = execSync("git rev-parse --abbrev-ref HEAD", {
-      stdio: ["ignore", "pipe", "ignore"],
-    })
-      .toString()
-      .trim();
-  } catch {
-    process.exit(0); // not a git repo — nothing to protect
-  }
-
-  if (branch === "main" || branch === "master") {
+  const branch = currentBranch(); // null when not a git repo — nothing to protect
+  if (isProtectedBranch(branch)) {
     console.error(
       `Blocked: refusing to run git ${gitVerb[1]} on '${branch}'. ` +
         "Create a feature branch first: git checkout -b <type>/<short-description>"

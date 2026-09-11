@@ -2,6 +2,7 @@
 name: hugo-verify
 description: Verify a Hugo site or theme builds clean and ships correct output before release — production build with warnings-as-errors, template lookup and unused-template audit, head/SEO surface, asset pipeline (fingerprint/SRI, image processing), internal links, and publish-surface hygiene (drafts, secrets, robots). Use before merging changes that touch layouts/, assets/, config, archetypes, or shortcodes — or when the user asks to "check the theme", "verify the build", or "audit the site".
 argument-hint: "Optional: 'config-only' to skip the build and audit templates/config statically"
+user-invocable: true
 ---
 
 # Hugo Verify

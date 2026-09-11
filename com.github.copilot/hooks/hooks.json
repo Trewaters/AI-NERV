@@ -1,0 +1,5 @@
+{
+  "//": "Plugin lifecycle hooks. Paths are relative to the plugin root. These run once per agent turn; the per-tool-call equivalents for Claude Code live in hooks/settings.snippets.json. See hooks/README.md.",
+  "preRun": ["hooks/pre-run.js"],
+  "postRun": ["hooks/post-run.js"]
+}

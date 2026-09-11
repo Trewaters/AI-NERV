@@ -2,6 +2,7 @@
 name: electron-verify
 description: Verify an Electron app's security posture and packaging readiness before release — BrowserWindow webPreferences, preload/contextBridge surface, IPC handler validation, navigation and external-content lockdown, CSP, and electron-builder config. Use before merging changes that touch main-process code, the preload script, window creation, or packaging config — or when the user asks to "check Electron security", "audit the IPC surface", or "verify the build config".
 argument-hint: "Optional: 'packaged' to also build with electron-builder and inspect the artifact"
+user-invocable: true
 ---
 
 # Electron Verify

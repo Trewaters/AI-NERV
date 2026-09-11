@@ -1,0 +1,23 @@
+{
+  "name": "ai-harness-core",
+  "version": "1.0.0",
+  "description": "Tre's shared AI harness: instruction fragments, skills, agents, hooks, and an MCP server for browsing the harness itself.",
+  "publisher": "trewaters",
+  "categories": ["skills", "agents", "mcp", "hooks"],
+  "repository": "https://github.com/trewaters/ai-harness-core",
+  "keywords": [
+    "ai-harness",
+    "instructions",
+    "code-review",
+    "accessibility",
+    "react",
+    "electron",
+    "hugo"
+  ],
+  "contributes": {
+    "skills": "skills/",
+    "mcp": "mcp.json",
+    "agents": "com.github.copilot/agents/",
+    "hooks": "com.github.copilot/hooks/hooks.json"
+  }
+}

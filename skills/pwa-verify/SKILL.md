@@ -2,6 +2,7 @@
 name: pwa-verify
 description: Verify a Vite + vite-plugin-pwa app's installability and offline correctness before release — production build, manifest completeness, icon set, service-worker registration and update strategy, and caching-config safety. Use before merging changes that touch vite.config.ts PWA options, the manifest, icons, the service-worker update flow, or caching strategies — or when the user asks to "check the PWA", "verify offline", or "audit the manifest".
 argument-hint: "Optional: 'config-only' to skip the build and audit configuration statically"
+user-invocable: true
 ---
 
 # PWA Verify

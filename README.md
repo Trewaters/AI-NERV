@@ -5,23 +5,44 @@ Shared AI-assistant configuration: the single source of truth that my project te
 
 Edit here → resync in each template → regenerate. Never edit the generated files directly.
 
+This repo is also an **agent plugin**, installable directly into VS Code / GitHub Copilot.
+Same files, two ways to consume them:
+
+- **As a subtree** (below) — when a repo needs the rules baked into its own generated
+  instruction files, so every collaborator and every agent working in it gets them.
+- **As a plugin** — when you want the skills, agents, hooks, and MCP server available
+  across every repo you open, without copying anything into those repos.
+  See [docs/PLUGIN.md](docs/PLUGIN.md).
+
 ## Layout
 
 ```
+plugin.json   Plugin manifest — identity and what this contributes as an agent plugin.
+mcp.json      Declares the aiHarnessCore MCP server (read-only access to this repo's
+              fragments, packs, skills, and references).
 fragments/    Instruction fragments, concatenated in filename order (00-, 10-, ...).
               These become CLAUDE.md / AGENTS.md / copilot-instructions.md downstream.
-skills/       Claude Code skills shared across projects. Copy or symlink into a
-              consuming repo's .claude/skills/.
-hooks/        Cross-platform Node hook scripts + settings.snippets.json to paste
-              into a consuming repo's .claude/settings.json. See hooks/README.md.
+skills/       Skills shared across projects, each user-invocable as a slash command.
+              Copy or symlink into a consuming repo's .claude/skills/, or get them
+              all at once by installing this as a plugin.
+hooks/        Cross-platform Node hook scripts, shared logic in hooks/lib/, and
+              settings.snippets.json to paste into a consuming repo's
+              .claude/settings.json. See hooks/README.md.
+com.github.copilot/
+              Plugin-facing config: agents/ (custom agent personas) and
+              hooks/hooks.json (preRun / postRun lifecycle hooks).
 scripts/      build-instructions.sh — the generator.
+              harness-mcp.js — the MCP server, Node stdlib only.
 references/   Full-length reference docs backing the distilled fragments:
               INCLUSION.md (inclusion guidance for AI-assisted generation) and
               A11Y.md (WCAG 2.2 AA reference with anti-patterns, severities,
               and fixes). Both distill into fragments/25-inclusion.md.
 docs/         Prose documentation about this repo itself (guides, decisions).
-              See docs/README.md.
+              See docs/README.md and docs/PLUGIN.md.
 ```
+
+Nothing here has a build step or a dependency: every script is Node standard library
+only, so both consumption paths work with no `npm install`.
 
 `Table_Of_Contents.md` stays at the root alongside this README: it is the
 `gh repo create` flag reference used by the template workflow below.
@@ -191,6 +212,42 @@ With either option, keep the numeric prefixes on copied fragments so ordering st
 stable, and delete any copied rules that are not true for that repo (see the pack's
 README for what its fragments assume).
 
+## Installing it as an agent plugin
+
+The third way to consume this repo, alongside the subtree options above: install the
+folder itself as an agent plugin, and get the skills, agents, hooks, and MCP server in
+every repo you open — without vendoring anything into those repos.
+
+Clone it anywhere, then in VS Code settings:
+
+```json
+{
+  "chat.plugins.enabled": true,
+  "chat.plugins.locations": ["/absolute/path/to/ai-harness-core"]
+}
+```
+
+Reload the window. You get:
+
+- **7 slash commands** — one per skill (`/pr-checklist`, `/staged-commit-workflow`,
+  `/changelog-update`, `/frontend-ui-design`, `/electron-verify`, `/pwa-verify`,
+  `/hugo-verify`).
+- **3 agents** — `harness-reviewer` (reviews a diff against the security, a11y, and
+  inclusion rules), `harness-release` (verify → changelog → commit), and
+  `harness-maintainer` (for editing this repo).
+- **The `aiHarnessCore` MCP server** — read-only tools over the fragments, packs,
+  skills, and references, so an agent can look a rule up instead of recalling it.
+  `build_instructions` previews what `build-instructions.sh` would generate for a
+  given pack without writing anything.
+- **Lifecycle hooks** — `preRun` reports branch and working-tree state; `postRun`
+  formats and credential-scans everything the turn touched.
+
+The plugin path does *not* replace the subtree path. A repo whose generated
+`CLAUDE.md` / `AGENTS.md` carries the rules gets them for everyone who works in it;
+a plugin only configures your own editor. Use both.
+
+Full details, including the MCP tool list and how to publish: [docs/PLUGIN.md](docs/PLUGIN.md).
+
 ## Resyncing a template after changing the core
 
 From the template repo's root:
@@ -303,7 +360,7 @@ If you want a starting scaffold, copy `fragments/_scaffold/NN-name.scaffold.md` 
 
 1. Create `skills/<skill-name>/SKILL.md`.
 2. If you want a starting scaffold, copy `skills/_scaffold/SKILL.scaffold.md` into the new folder as `SKILL.md`.
-3. Start with frontmatter containing at least `name` and `description`.
+3. Start with frontmatter containing at least `name` and `description`. Add `user-invocable: true` so the skill is also reachable as a `/<skill-name>` slash command when this repo is installed as a plugin — every shipped skill sets it.
 4. Write the body so the agent can answer three things without guessing:
     - When the skill should be used
     - What inputs or flags it accepts

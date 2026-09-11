@@ -1,6 +1,7 @@
 ---
 name: pr-checklist
 description: Pre-PR verification pass — run checks, review the diff, and draft the PR description. Use when the user says the work is ready for a PR, asks to open a PR, or asks for a pre-PR review.
+user-invocable: true
 ---
 
 # PR checklist

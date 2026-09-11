@@ -1,0 +1,10 @@
+{
+  "servers": [
+    {
+      "id": "aiHarnessCore",
+      "description": "Read-only access to this harness: instruction fragments, stack packs, skills, and the long-form accessibility/inclusion references. Also renders the combined instruction file for a given pack without writing to disk.",
+      "command": "node",
+      "args": ["./scripts/harness-mcp.js"]
+    }
+  ]
+}
